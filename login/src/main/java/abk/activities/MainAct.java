@@ -1,43 +1,36 @@
 package abk.activities;
 
-import abk.utilities.LoginService;
+import abk.utilities.Constants;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 
-public class LoginAct extends Activity implements View.OnClickListener {
-
-    private Button btnLogin;
-    private EditText login;
-    private EditText password;
-
+public class MainAct extends Activity implements View.OnClickListener {
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_act);
-        initFields();
+        setContentView(R.layout.main_act);
+        initFiels();
     }
 
-    private void initFields() {
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        login = (EditText) findViewById(R.id.txtLogin);
-        password = (EditText) findViewById(R.id.txtPassword);
-
-        btnLogin.setOnClickListener(this);
+    private void initFiels() {
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -58,11 +51,14 @@ public class LoginAct extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.equals(btnLogin)) {
-            Toast.makeText(this, "Tentando Login", Toast.LENGTH_SHORT).show();
-            LoginService loginService = new LoginService(getApplicationContext(), "http://192.168.0.107/audiobook/Login.php");
-            loginService.execute("", login.getText().toString(), password.getText().toString());
-            //todo:verificar conexão com a internet...
+        if (view.equals(btnLogout)) {
+            SharedPreferences prefs = getSharedPreferences(Constants.SESSION_LOGIN, 0);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(Constants.IS_LOGGED, false).apply();
+            Intent it = new Intent(this, StartAct.class);
+
+            this.finish();
+            startActivity(it);
         }
     }
 }
