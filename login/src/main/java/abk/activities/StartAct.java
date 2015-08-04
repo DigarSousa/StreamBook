@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class StartAct extends Activity implements View.OnClickListener {
-    private Button btnLogin;
-    private Button btnSignUp;
+    private ImageButton btnLogin;
+    private ImageButton btnSignUp;
 
 
     @Override
@@ -21,9 +21,8 @@ public class StartAct extends Activity implements View.OnClickListener {
         if (prefs != null) {
             if (prefs.getBoolean(Constants.IS_LOGGED, false)) {
                 Intent it = new Intent(this, MainAct.class);
-                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(it);
-
+                this.finish();
             }
         }
         super.onCreate(savedInstanceState);
@@ -32,8 +31,8 @@ public class StartAct extends Activity implements View.OnClickListener {
     }
 
     private void initFiels() {
-        btnLogin = (Button) findViewById(R.id.btnStartLogin);
-        btnSignUp = (Button) findViewById(R.id.btnStartSignUp);
+        btnLogin = (ImageButton) findViewById(R.id.btnStartLogin);
+        btnSignUp = (ImageButton) findViewById(R.id.btnStartSignUp);
 
         btnLogin.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);

@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -76,8 +75,6 @@ public class LoginService extends AsyncTask<String, Void, Short> {
 
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();

@@ -1,26 +1,22 @@
 package abk.activities;
 
-import abk.utilities.DataUtil;
+import abk.utilities.Constants;
 import abk.utilities.LoginService;
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 
 public class SignUpAct extends Activity implements View.OnClickListener {
-    private Button signUp;
+    private ImageButton signUp;
     private EditText name;
     private EditText email;
     private EditText pass;
     private EditText confirmPass;
-    private CheckBox chkMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,40 +27,15 @@ public class SignUpAct extends Activity implements View.OnClickListener {
     }
 
     private void initFields() {
-        signUp = (Button) findViewById(R.id.btnSignUP);
+        signUp = (ImageButton) findViewById(R.id.btnSignUP);
         name = (EditText) findViewById(R.id.txtName);
         email = (EditText) findViewById(R.id.txtEmail);
         pass = (EditText) findViewById(R.id.txtPass);
         confirmPass = (EditText) findViewById(R.id.txtConfirmPass);
-        chkMail = (CheckBox) findViewById(R.id.chkEmail);
-
-        chkMail.setChecked(true);
-        chkMail.setVisibility(View.INVISIBLE);
     }
 
     private void initListeners() {
         signUp.setOnClickListener(this);
-
-        email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (DataUtil.isEmailValid(email.getText().toString())) {
-                    chkMail.setVisibility(View.VISIBLE);
-                } else {
-                    chkMail.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
     }
 
     @Override
@@ -92,7 +63,7 @@ public class SignUpAct extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.equals(signUp)) {
-            LoginService loginService = new LoginService(getApplicationContext(), "http://192.168.0.107/audiobook/SignUp.php");
+            LoginService loginService = new LoginService(getApplicationContext(), Constants.URL_SIGN_UP);
             loginService.execute(name.getText().toString(), email.getText().toString(), pass.getText().toString());
         }
     }

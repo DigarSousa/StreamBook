@@ -1,19 +1,18 @@
 package abk.activities;
 
+import abk.utilities.Constants;
 import abk.utilities.LoginService;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
+import android.widget.ImageButton;
 
 public class LoginAct extends Activity implements View.OnClickListener {
 
-    private Button btnLogin;
+    private ImageButton btnLogin;
     private EditText login;
     private EditText password;
 
@@ -26,8 +25,8 @@ public class LoginAct extends Activity implements View.OnClickListener {
     }
 
     private void initFields() {
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        login = (EditText) findViewById(R.id.txtLogin);
+        btnLogin = (ImageButton) findViewById(R.id.btnLogin);
+        login = (EditText) findViewById(R.id.txtEmail);
         password = (EditText) findViewById(R.id.txtPassword);
 
         btnLogin.setOnClickListener(this);
@@ -59,10 +58,9 @@ public class LoginAct extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.equals(btnLogin)) {
-            Toast.makeText(this, "Tentando Login", Toast.LENGTH_SHORT).show();
-            LoginService loginService = new LoginService(getApplicationContext(), "http://192.168.0.107/audiobook/Login.php");
+            LoginService loginService = new LoginService(getApplicationContext(), Constants.URL_LOGIN);
             loginService.execute("", login.getText().toString(), password.getText().toString());
-            //todo:verificar conexão com a internet...
+
         }
     }
 }
