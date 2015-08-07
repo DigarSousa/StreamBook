@@ -1,12 +1,16 @@
 package abk.activities;
 
 import abk.utilities.Constants;
+import abk.utilities.DataUtil;
 import abk.utilities.LoginService;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -17,6 +21,7 @@ public class SignUpAct extends Activity implements View.OnClickListener {
     private EditText email;
     private EditText pass;
     private EditText confirmPass;
+    private CheckBox chkMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +37,42 @@ public class SignUpAct extends Activity implements View.OnClickListener {
         email = (EditText) findViewById(R.id.txtEmail);
         pass = (EditText) findViewById(R.id.txtPass);
         confirmPass = (EditText) findViewById(R.id.txtConfirmPass);
+        chkMail = (CheckBox) findViewById(R.id.chkMail);
+
+        signUp.setEnabled(false);
+        chkMail.setChecked(true);
+        chkMail.setVisibility(View.INVISIBLE);
     }
 
     private void initListeners() {
         signUp.setOnClickListener(this);
+
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (DataUtil.isEmailValid(charSequence)) {
+                    signUp.setAlpha(1f);
+                    signUp.setEnabled(true);
+
+                    chkMail.setVisibility(View.VISIBLE);
+                } else {
+                    signUp.setEnabled(false);
+                    signUp.setAlpha(0.4f);
+
+                    chkMail.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override

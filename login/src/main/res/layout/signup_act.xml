@@ -113,7 +113,7 @@
 
             <EditText
                     android:background="@null"
-                    android:layout_width="fill_parent"
+                    android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:inputType="textEmailAddress"
@@ -124,6 +124,15 @@
                     android:typeface="monospace"
                     android:hint="@string/hintEmail"
                     android:gravity="center"/>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chkMail"
+                    android:checked="false" android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:button="@drawable/checkbox_style"
+                    />
+
         </RelativeLayout>
 
         //Password
@@ -208,7 +217,7 @@
                 android:src="@drawable/signup_icon"
                 android:layout_below="@+id/passConfirmArea"
                 android:layout_centerHorizontal="true"
-                android:alpha="0.7"/>
+                android:alpha="0.3"/>
 
     </RelativeLayout>
     //-----------------------------------------------------------------------
