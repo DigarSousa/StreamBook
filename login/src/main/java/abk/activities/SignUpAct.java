@@ -10,10 +10,9 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
+import android.widget.ImageView;
 
 public class SignUpAct extends Activity implements View.OnClickListener {
     private ImageButton signUp;
@@ -21,7 +20,9 @@ public class SignUpAct extends Activity implements View.OnClickListener {
     private EditText email;
     private EditText pass;
     private EditText confirmPass;
-    private CheckBox chkMail;
+    private ImageView imgCheckMail;
+    private Boolean validMail;
+    private Boolean validPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,13 @@ public class SignUpAct extends Activity implements View.OnClickListener {
         email = (EditText) findViewById(R.id.txtEmail);
         pass = (EditText) findViewById(R.id.txtPass);
         confirmPass = (EditText) findViewById(R.id.txtConfirmPass);
-        chkMail = (CheckBox) findViewById(R.id.chkMail);
+        imgCheckMail = (ImageView) findViewById(R.id.imgCheckMail);
 
         signUp.setEnabled(false);
-        chkMail.setChecked(true);
-        chkMail.setVisibility(View.INVISIBLE);
     }
 
     private void initListeners() {
+
         signUp.setOnClickListener(this);
 
         email.addTextChangedListener(new TextWatcher() {
@@ -56,15 +56,11 @@ public class SignUpAct extends Activity implements View.OnClickListener {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (DataUtil.isEmailValid(charSequence)) {
-                    signUp.setAlpha(1f);
-                    signUp.setEnabled(true);
-
-                    chkMail.setVisibility(View.VISIBLE);
+                    imgCheckMail.setImageResource(R.drawable.ok_icon);
+                    validMail = true;
                 } else {
-                    signUp.setEnabled(false);
-                    signUp.setAlpha(0.4f);
-
-                    chkMail.setVisibility(View.INVISIBLE);
+                    imgCheckMail.setImageResource(R.drawable.warning);
+                    validMail = false;
                 }
             }
 
@@ -73,6 +69,50 @@ public class SignUpAct extends Activity implements View.OnClickListener {
 
             }
         });
+
+        confirmPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (isValidPass()) {
+                    validPass = true;
+                    isValidSignUp();
+                } else {
+                    validPass = false;
+                    isValidSignUp();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void isValidSignUp() {
+        if (validMail && validPass) {
+            signUp.setAlpha(1f);
+            signUp.setEnabled(true);
+        } else {
+            signUp.setAlpha(0.4f);
+            signUp.setEnabled(false);
+        }
+    }
+
+
+    private boolean isValidPass() {
+        if (!pass.getText().toString().equals(confirmPass.getText().toString())) {
+            return false;
+        }
+        if (pass.getText().length() < 6) {
+            return false;
+        }
+        return true;
     }
 
     @Override

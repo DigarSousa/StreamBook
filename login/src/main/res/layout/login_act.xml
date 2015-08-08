@@ -26,9 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/loginTitleArea"
-            android:layout_below="@+id/logo"
-            android:layout_marginTop="100dp"
-            android:layout_alignParentLeft="true"
+            android:layout_marginTop="53dp"
+            android:layout_below="@+id/logo" android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
 
         <TextView
@@ -140,7 +139,7 @@
                 android:src="@drawable/login_icon"
                 android:layout_below="@+id/passArea"
                 android:layout_centerHorizontal="true"
-                android:alpha="0.7"/>
+                android:alpha="0.4"/>
 
     </RelativeLayout>
     //-----------------------------------------------------------------------

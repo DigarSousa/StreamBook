@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,6 +27,8 @@ public class LoginService extends AsyncTask<String, Void, Short> {
         this.context = context;
         this.httpUrl = httpUrl;
     }
+
+    //todo:verificar conexão com o servidor...
 
     @Override
     protected void onPreExecute() {
