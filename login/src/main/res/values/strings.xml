@@ -12,4 +12,6 @@
     <string name="hintPasswordLogin">●●●●●●</string>
     <string name="hintPassword">senha</string>
     <string name="hintPasswordConfirm">confirme a senha</string>
+    <string name="title_activity_sign_up_password">SignUpPassword</string>
+    <string name="next">Seguinte</string>
 </resources>

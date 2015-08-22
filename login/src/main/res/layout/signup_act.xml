@@ -43,8 +43,8 @@
             android:id="@+id/SignUpArea"
             android:paddingTop="20dp"
             android:paddingBottom="3dp"
-            android:layout_below="@+id/SignUpTitleArea"
-            android:layout_centerHorizontal="true">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:layout_below="@+id/SignUpTitle">
 
         //Name
         <RelativeLayout
@@ -55,8 +55,8 @@
                 android:paddingBottom="3dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/edittext_area">
+                android:background="@drawable/edittext_area" android:layout_alignRight="@+id/emailArea"
+                android:layout_alignEnd="@+id/emailArea">
 
             <!--<ImageView
                 android:id="@+id/personIcon"
@@ -122,90 +122,20 @@
                     android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/next"
+                android:id="@+id/lblNext"
+                android:clickable="true"
+                android:textColor="@color/link_text_material_light"
+                android:textSize="16dp"
+                android:layout_below="@+id/emailArea" android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"/>
 
         //Password
-        <RelativeLayout
-                android:layout_width="290dp"
-                android:layout_height="40dp"
-                android:id="@+id/passArea"
-                android:layout_marginTop="10dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/emailArea"
-                android:background="@drawable/edittext_area">
-
-            <!--<ImageView
-                android:id="@+id/emailIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/person_icon"
-                android:layout_centerVertical="true"/>-->
-
-            <EditText
-                    android:background="@null"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:inputType="textPassword"
-                    android:id="@+id/txtPass"
-                    android:textColor="#ffebdde9"
-                    android:textColorHint="#ffebdde9"
-                    android:textSize="18sp"
-                    android:typeface="monospace"
-                    android:hint="@string/hintPassword"
-                    android:gravity="center"/>
-        </RelativeLayout>
 
         //Password
-        <RelativeLayout
-                android:layout_width="290dp"
-                android:layout_height="40dp"
-                android:id="@+id/passConfirmArea"
-                android:layout_marginTop="10dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/passArea"
-                android:background="@drawable/edittext_area">
-
-            <!--<ImageView
-                android:id="@+id/emailIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/person_icon"
-                android:layout_centerVertical="true"/>-->
-
-            <EditText
-                    android:background="@null"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:inputType="textPassword"
-                    android:id="@+id/txtConfirmPass"
-                    android:textColor="#ffebdde9"
-                    android:textColorHint="#ffebdde9"
-                    android:textSize="18sp"
-                    android:typeface="monospace"
-                    android:hint="@string/hintPasswordConfirm"
-                    android:gravity="center"/>
-        </RelativeLayout>
-
-        <ImageButton
-                android:id="@+id/btnSignUP"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="fitCenter"
-                android:layout_marginTop="20dp"
-                android:background="#00000000"
-                android:src="@drawable/signup_icon"
-                android:layout_below="@+id/passConfirmArea"
-                android:layout_centerHorizontal="true"
-                android:alpha="0.4"/>
 
     </RelativeLayout>
     <TextView
@@ -217,8 +147,8 @@
             android:textSize="25sp"
             android:typeface="monospace"
             android:text="@string/signUp"
-            android:gravity="center" android:layout_below="@+id/logo" android:layout_centerHorizontal="true"
-            android:layout_marginTop="47dp"/>
+            android:gravity="center"
+            android:layout_marginTop="25dp" android:layout_below="@+id/logo" android:layout_centerHorizontal="true"/>
     //-----------------------------------------------------------------------
     //===========================================================================
 </RelativeLayout>

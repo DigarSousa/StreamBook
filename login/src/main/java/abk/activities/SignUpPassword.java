@@ -1,42 +1,51 @@
 package abk.activities;
 
-import abk.utilities.DataUtil;
+import abk.utilities.Constants;
+import abk.utilities.LoginService;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
-public class SignUpAct extends Activity implements View.OnClickListener {
-    private EditText name;
-    private EditText email;
-    private ImageView imgCheckMail;
-    private TextView lblNext;
+
+public class SignUpPassword extends Activity implements View.OnClickListener {
+    private String name;
+    private String email;
+
+    private ImageButton btnSignUp;
+    private EditText pass;
+    private EditText confirmPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup_act);
+        setContentView(R.layout.signup_password_act);
         initFields();
         initListeners();
     }
 
-    private void initFields() {
-        name = (EditText) findViewById(R.id.txtName);
-        email = (EditText) findViewById(R.id.txtEmail);
-        imgCheckMail = (ImageView) findViewById(R.id.imgCheckMail);
-        lblNext = (TextView) findViewById(R.id.lblNext);
 
-        lblNext.setOnClickListener(this);
-        lblNext.setVisibility(View.INVISIBLE);
+    private void initFields() {
+        Bundle bundle = getIntent().getExtras();
+        name = bundle.getString("name");
+        email = bundle.getString("email");
+
+        btnSignUp = (ImageButton) findViewById(R.id.btnSignUp);
+        pass = (EditText) findViewById(R.id.txtPass);
+        confirmPass = (EditText) findViewById(R.id.txtConfirmPass);
+
+        btnSignUp.setEnabled(false);
     }
 
     private void initListeners() {
-        email.addTextChangedListener(new TextWatcher() {
+        btnSignUp.setOnClickListener(this);
+
+        confirmPass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -44,12 +53,12 @@ public class SignUpAct extends Activity implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (DataUtil.isEmailValid(charSequence)) {
-                    imgCheckMail.setImageResource(R.drawable.ok_icon);
-                    lblNext.setVisibility(View.VISIBLE);
+                if (pass.getText().length() > 6 && charSequence.toString().equals(pass.getText().toString())) {
+                    btnSignUp.setAlpha(1f);
+                    btnSignUp.setEnabled(true);
                 } else {
-                    imgCheckMail.setImageResource(R.drawable.warning);
-                    lblNext.setVisibility(View.INVISIBLE);
+                    btnSignUp.setAlpha(0.4f);
+                    btnSignUp.setEnabled(false);
                 }
             }
 
@@ -58,14 +67,12 @@ public class SignUpAct extends Activity implements View.OnClickListener {
 
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.signup_menu, menu);
+        getMenuInflater().inflate(R.menu.signup_password_menu, menu);
         return true;
     }
 
@@ -86,11 +93,9 @@ public class SignUpAct extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.equals(lblNext)) {
-            Intent it = new Intent(this, SignUpPassword.class);
-            it.putExtra("email", email.getText().toString());
-            it.putExtra("name", name.getText().toString());
-            startActivity(it);
+        if (view.equals(btnSignUp)) {
+            LoginService loginService = new LoginService(getApplicationContext(), Constants.URL_SIGN_UP);
+            loginService.execute(name, email, pass.getText().toString());
         }
     }
 }

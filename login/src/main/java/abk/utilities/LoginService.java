@@ -114,4 +114,8 @@ public class LoginService extends AsyncTask<String, Void, Short> {
         return jsonLogin;
     }
 
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+    }
 }
