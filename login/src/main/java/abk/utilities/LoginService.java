@@ -28,7 +28,7 @@ public class LoginService extends AsyncTask<String, Void, Short> {
         this.httpUrl = httpUrl;
     }
 
-    //todo:verificar conexão com o servidor...
+    //todo:verificar conexão com o servidor e passar o retorno para o main frame...
 
     @Override
     protected void onPreExecute() {

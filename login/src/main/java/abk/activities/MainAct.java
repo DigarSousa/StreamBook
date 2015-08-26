@@ -1,6 +1,7 @@
 package abk.activities;
 
 import abk.utilities.Constants;
+import abk.utilities.GridUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,21 +10,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class MainAct extends Activity implements View.OnClickListener {
     private Button btnLogout;
+    private ImageView imgMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_act);
         initFiels();
+        GridUtil grid = new GridUtil("http://192.168.0.107/edgar/IdeaProjects/AudioBookPHP/Facade/Category.php", getApplicationContext(),imgMain);
+        grid.execute();
     }
 
     private void initFiels() {
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(this);
+
+        imgMain = (ImageView) findViewById(R.id.imgMainView);
     }
 
 
