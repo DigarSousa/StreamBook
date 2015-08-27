@@ -67,7 +67,7 @@ public class MainAct extends Activity implements View.OnClickListener {
             SharedPreferences prefs = getSharedPreferences(Constants.SESSION_LOGIN, 0);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(Constants.IS_LOGGED, false).apply();
-            Intent it = new Intent(this, StartAct.class);
+            Intent it = new Intent(this, CategoriesAct.class);
 
             this.finish();
             startActivity(it);
