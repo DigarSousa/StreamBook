@@ -44,7 +44,7 @@ public class SignUpAct extends Activity implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (DataUtil.isEmailValid(charSequence)) {
+                if (DataUtil.isValidMail(charSequence)) {
                     imgCheckMail.setImageResource(R.drawable.ok_icon);
                     lblNext.setVisibility(View.VISIBLE);
                 } else {

@@ -1,11 +1,8 @@
 package abk.utilities;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import abk.model.Category;
 import android.os.AsyncTask;
-import android.util.Base64;
-import android.widget.ImageView;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,24 +12,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by edgar on 24/08/15.
  */
-public class GridUtil extends AsyncTask<Void, Void, Bitmap> {
+public class GridUtil extends AsyncTask<Void, Void, Void> {
     private String url;
-    private Context context;
-    Bitmap bitmap;
-    ImageView imageView;
+    private List<Category> categories;
 
-    public GridUtil(String url, Context context, ImageView imageView) {
+    public GridUtil(String url) {
         this.url = url;
-        this.context = context;
-        this.imageView = imageView;
+        categories = new ArrayList();
     }
 
     @Override
-    protected Bitmap doInBackground(Void... voids) {
+    protected Void doInBackground(Void... voids) {
         URL toConnect;
         HttpURLConnection connection;
         InputStreamReader in;
@@ -52,11 +48,18 @@ public class GridUtil extends AsyncTask<Void, Void, Bitmap> {
             }
 
             line = sb.toString();
-            JSONObject json = new JSONObject(line);
-            String imagem = json.getString("image");
-            byte[] decode = Base64.decode(imagem, Base64.DEFAULT);
+            JSONArray jsonArray = new JSONArray(line);
 
-            bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject json = (JSONObject) jsonArray.get(i);
+                Category category = new Category();
+                category.setIdentifier(json.getLong("id"));
+                category.setName(json.getString("name"));
+                category.setImage(DataUtil.getBitMapByBase64(json.getString("image")));
+
+                categories.add(category);
+            }
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -65,12 +68,10 @@ public class GridUtil extends AsyncTask<Void, Void, Bitmap> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return bitmap;
+        return null;
     }
 
-    @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
+    public List<Category> getCategories() {
+        return categories;
     }
-
 }
