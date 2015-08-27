@@ -1,6 +1,7 @@
 package abk.utilities.adapter;
 
 import abk.activities.R;
+import abk.model.Category;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Pedreduardo on 22/08/2015.
@@ -22,11 +23,11 @@ public class CategorieAdpt extends BaseAdapter {
     //Attributes
     //--------------------------------------------
     private Context context;
-    private final ArrayList<String> categories;
+    private final List<Category> categories;
     private View gridView;
     //--------------------------------------------
 
-    public CategorieAdpt(Context context, ArrayList<String> categories) {
+    public CategorieAdpt(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
     }
@@ -44,8 +45,7 @@ public class CategorieAdpt extends BaseAdapter {
 
             setLabelToCategory(position);
             setImageToCategory();
-        }
-        else{
+        } else {
             this.gridView = convertView;
         }
         return gridView;
@@ -53,19 +53,19 @@ public class CategorieAdpt extends BaseAdapter {
 
     private void setLabelToCategory(int position) {
         TextView lblCategory = (TextView) gridView.findViewById(R.id.lblCategorie);
-        lblCategory.setText(categories.get(position));
+        lblCategory.setText(categories.get(position).getName());
     }
 
     private void setImageToCategory() {
         ImageView imgCategory = (ImageView) gridView.findViewById(R.id.imgCategory);
-        Bitmap imgCategoryNormal =  BitmapFactory.decodeResource(this.context.getResources(), R.drawable.random_objects);
+        Bitmap imgCategoryNormal = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.random_objects);
 
         final int maxSize = 250;
         int outWidth;
         int outHeight;
         int inWidth = imgCategoryNormal.getWidth();
         int inHeight = imgCategoryNormal.getHeight();
-        if(inWidth > inHeight){
+        if (inWidth > inHeight) {
             outWidth = maxSize;
             outHeight = (inHeight * maxSize) / inWidth;
         } else {

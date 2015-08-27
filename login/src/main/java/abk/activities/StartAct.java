@@ -20,7 +20,7 @@ public class StartAct extends Activity implements View.OnClickListener {
         SharedPreferences prefs = getSharedPreferences(Constants.SESSION_LOGIN, 0);
         if (prefs != null) {
             if (prefs.getBoolean(Constants.IS_LOGGED, false)) {
-                Intent it = new Intent(this, MainAct.class);
+                Intent it = new Intent(this, CategoriesAct.class);
                 startActivity(it);
                 this.finish();
             }

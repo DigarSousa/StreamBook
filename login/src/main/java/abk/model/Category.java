@@ -10,6 +10,7 @@ public class Category {
     private String name;
     private Bitmap image;
 
+
     public Long getIdentifier() {
         return identifier;
     }

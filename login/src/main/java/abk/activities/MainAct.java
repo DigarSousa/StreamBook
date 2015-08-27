@@ -1,8 +1,6 @@
 package abk.activities;
 
-import abk.model.Category;
 import abk.utilities.Constants;
-import abk.utilities.GridUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import java.util.List;
 
 
 public class MainAct extends Activity implements View.OnClickListener {
@@ -25,10 +21,6 @@ public class MainAct extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_act);
         initFiels();
-        GridUtil grid = new GridUtil("http://192.168.0.107/edgar/IdeaProjects/AudioBookPHP/Facade/Category.php");
-        grid.execute();
-        List<Category> categories = grid.getCategories();
-        categories = null;
     }
 
     private void initFiels() {

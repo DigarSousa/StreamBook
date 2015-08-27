@@ -48,7 +48,7 @@ public class SignUpAct extends Activity implements View.OnClickListener {
                     imgCheckMail.setImageResource(R.drawable.ok_icon);
                     lblNext.setVisibility(View.VISIBLE);
                 } else {
-                    imgCheckMail.setImageResource(R.drawable.warning);
+                    imgCheckMail.setImageResource(R.drawable.warning_icon);
                     lblNext.setVisibility(View.INVISIBLE);
                 }
             }

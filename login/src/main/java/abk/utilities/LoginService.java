@@ -1,12 +1,13 @@
 package abk.utilities;
 
-import abk.activities.MainAct;
+import abk.activities.CategoriesAct;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -92,7 +93,7 @@ public class LoginService extends AsyncTask<String, Void, Short> {
             SharedPreferences settings = context.getSharedPreferences(Constants.SESSION_LOGIN, 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean(Constants.IS_LOGGED, true).apply();
-            Intent intent = new Intent(context, MainAct.class);
+            Intent intent = new Intent(context, CategoriesAct.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
         }

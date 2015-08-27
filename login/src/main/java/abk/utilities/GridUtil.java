@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,9 +21,9 @@ public class GridUtil extends AsyncTask<Void, Void, Void> {
     private String url;
     private List<Category> categories;
 
-    public GridUtil(String url) {
+    public GridUtil(String url, List<Category> categories) {
         this.url = url;
-        categories = new ArrayList();
+        this.categories = categories;
     }
 
     @Override
