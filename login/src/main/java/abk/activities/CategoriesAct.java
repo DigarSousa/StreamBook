@@ -4,7 +4,6 @@ package abk.activities;
  * Created by Pedreduardo on 22/08/2015.
  */
 
-import abk.utilities.Adapter.CategorieAdpt;
 import abk.utilities.adapter.CategorieAdpt;
 import android.app.Activity;
 import android.os.Bundle;
