@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Pedreduardo on 22/08/2015.
  */
-public class CategorieAdpt extends BaseAdapter {
+public class CategoriesAdapt extends BaseAdapter {
 
     //Attributes
     //--------------------------------------------
@@ -27,7 +27,7 @@ public class CategorieAdpt extends BaseAdapter {
     private View gridView;
     //--------------------------------------------
 
-    public CategorieAdpt(Context context, List<Category> categories) {
+    public CategoriesAdapt(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
     }

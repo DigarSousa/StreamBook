@@ -4,10 +4,7 @@ package abk.activities;
  * Created by Pedreduardo on 22/08/2015.
  */
 
-import abk.model.Category;
-import abk.utilities.Constants;
-import abk.utilities.GridUtil;
-import abk.utilities.adapter.CategorieAdpt;
+import abk.utilities.adapter.CategoriesAdapt;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,27 +15,42 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class CategoriesAct extends Activity {
 
-    private CategorieAdpt gridAdapter;
-    private GridView gridView;
-    private List<Category> categories;
-
-    public CategoriesAct() {
-        categories = new ArrayList();
-    }
+    CategoriesAdapt gridAdapter;
+    GridView gridView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_act);
 
-        new GridUtil(Constants.URL_CATEGORY, categories).execute();
+        //Buscar categorias aqui
+        //---------------------------------------
+        //this.categories = new Categories();
+        //---------------------------------------
+
+        ArrayList<String> lala = new ArrayList<String>();
+        lala.add("eita");
+        lala.add("lelele");
+        lala.add("OIEOEIOEI");
+        lala.add("eita");
+        lala.add("lelele");
+        lala.add("OIEOEIOEI");
+        lala.add("eita");
+        lala.add("lelele");
+        lala.add("OIEOEIOEI");
+        lala.add("eita");
+        lala.add("lelele");
+        lala.add("OIEOEIOEI");
+        lala.add("eita");
+        lala.add("lelele");
+        lala.add("OIEOEIOEI");
 
         gridView = (GridView) findViewById(R.id.grdCategories);
-        this.gridAdapter = new CategorieAdpt(this, categories);
+        this.gridAdapter = new CategoriesAdapt(this, null);
         gridView.setAdapter(gridAdapter);
         gridAdapter.notifyDataSetChanged();
         //setListeners();
