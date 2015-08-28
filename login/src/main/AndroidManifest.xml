@@ -34,6 +34,10 @@
             android:name=".SignUpPassword"
             android:label="@string/title_activity_sign_up_password" >
         </activity>
+        <activity
+            android:name=".CategoriesAct"
+            android:label="@string/title_activity_categories" >
+        </activity>
     </application>
 
 </manifest>

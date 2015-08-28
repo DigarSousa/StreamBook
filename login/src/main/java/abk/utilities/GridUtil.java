@@ -1,7 +1,11 @@
 package abk.utilities;
 
 import abk.model.Category;
+import abk.utilities.adapter.CategoriesAdapt;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.GridView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,22 +16,31 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by edgar on 24/08/15.
  */
-public class GridUtil extends AsyncTask<Void, Void, Void> {
+public class GridUtil extends AsyncTask<Void, Void, List<Category>> {
     private String url;
-    private List<Category> categories;
+    private Context context;
+    private GridView gridView;
+    private CategoriesAdapt categoriesAdapt;
 
-    public GridUtil(String url, List<Category> categories) {
+    public GridUtil(GridView gridView, Context context, String url) {
         this.url = url;
-        this.categories = categories;
+        this.context = context;
+        this.gridView = gridView;
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected void onPreExecute() {
+    }
+
+    @Override
+    protected List<Category> doInBackground(Void... voids) {
+        List<Category> categories = new ArrayList();
         URL toConnect;
         HttpURLConnection connection;
         InputStreamReader in;
@@ -59,7 +72,6 @@ public class GridUtil extends AsyncTask<Void, Void, Void> {
                 categories.add(category);
             }
 
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -67,10 +79,14 @@ public class GridUtil extends AsyncTask<Void, Void, Void> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return categories;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    @Override
+    protected void onPostExecute(List<Category> categories) {
+        super.onPostExecute(categories);
+        categoriesAdapt = new CategoriesAdapt(context, categories);
+        gridView.setAdapter(categoriesAdapt);
+        categoriesAdapt.notifyDataSetChanged();
     }
 }
