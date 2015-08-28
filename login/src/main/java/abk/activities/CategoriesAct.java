@@ -26,7 +26,7 @@ public class CategoriesAct extends Activity {
         setContentView(R.layout.categories_act);
 
         gridView = (GridView) findViewById(R.id.grdCategories);
-        new GridService(gridView, getApplicationContext(), Constants.URL_CATEGORY, Constants.CATEGORY).execute();
+        new GridService(gridView, getApplicationContext(), Constants.URL_CATEGORY, Constants.BOOK).execute();
 
     }
 

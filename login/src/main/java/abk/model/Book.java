@@ -7,7 +7,7 @@ public class Book {
     private Long identifier;
     private String name;
     private String image;
-    private Category category;
+    private Long idCategory;
 
     public Long getIdentifier() {
         return identifier;
@@ -33,11 +33,12 @@ public class Book {
         this.image = image;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getIdCategory() {
+        return idCategory;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
     }
+
 }

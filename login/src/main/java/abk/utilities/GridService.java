@@ -1,5 +1,6 @@
 package abk.utilities;
 
+import abk.model.Book;
 import abk.model.Category;
 import abk.utilities.adapter.CategoriesAdapt;
 import android.content.Context;
@@ -26,14 +27,16 @@ public class GridService extends AsyncTask<Void, Void, List<Category>> {
     private String url;
     private Context context;
     private Short gridType;
+    private Short idCategory;
     private GridView gridView;
-    private CategoriesAdapt categoriesAdapt;
+    private CategoriesAdapt adapt;
 
-    public GridService(GridView gridView, Context context, String url, Short gridType) {
+    public GridService(GridView gridView, Context context, String url, Short gridType, Short idCategory) {
         this.url = url;
         this.context = context;
         this.gridView = gridView;
         this.gridType = gridType;
+        this.idCategory = idCategory;
     }
 
     @Override
@@ -41,39 +44,20 @@ public class GridService extends AsyncTask<Void, Void, List<Category>> {
     }
 
     @Override
-    protected List<Category> doInBackground(Void... voids) {
-        List<Category> categories = new ArrayList<Category>();
+    protected List doInBackground(Void... voids) {
+        List objects = new ArrayList<Category>();
         URL toConnect;
         HttpURLConnection connection;
         InputStreamReader in;
         OutputStreamWriter out;
-        BufferedReader reader;
+        JSONArray jsonArray;
         try {
             toConnect = new URL(url);
             connection = (HttpURLConnection) toConnect.openConnection();
             connection.setDoInput(true);
-            connection.setDoOutput(true);
 
-            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-
-
-            out = new OutputStreamWriter(connection.getOutputStream());
-            out.write(gridType.toString());
-            out.flush();
-            out.close();
-
-
-            in = new InputStreamReader(connection.getInputStream());
-            reader = new BufferedReader(in);
-            String line;
-            StringBuilder sb = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-
-            line = sb.toString();
-            JSONArray jsonArray = new JSONArray(line);
             if (gridType.equals(Constants.CATEGORY)) {
+                jsonArray = new JSONArray(getJsonString(connection));
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject json = (JSONObject) jsonArray.get(i);
                     Category category = new Category();
@@ -81,11 +65,21 @@ public class GridService extends AsyncTask<Void, Void, List<Category>> {
                     category.setName(json.getString("name"));
                     category.setImage(DataUtil.getBitMapByBase64(json.getString("image")));
 
-                    categories.add(category);
+                    objects.add(category);
                 }
             } else {
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                out = new OutputStreamWriter(connection.getOutputStream());
+                out.write(createJson(gridType, idCategory).toString());
+                out.flush();
+                out.close();
+
+                jsonArray = new JSONArray(getJsonString(connection));
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject json = (JSONObject) jsonArray.get(i);
+
+                    Book book = new Book();
 
 
                 }
@@ -97,14 +91,36 @@ public class GridService extends AsyncTask<Void, Void, List<Category>> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return categories;
+        return objects;
+    }
+
+    private String getJsonString(HttpURLConnection connection) throws IOException {
+        InputStreamReader in = new InputStreamReader(connection.getInputStream());
+        BufferedReader reader = new BufferedReader(in);
+        String line;
+        StringBuilder sb = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        return sb.toString();
+
     }
 
     @Override
-    protected void onPostExecute(List<Category> categories) {
-        super.onPostExecute(categories);
-        categoriesAdapt = new CategoriesAdapt(context, categories);
-        gridView.setAdapter(categoriesAdapt);
-        categoriesAdapt.notifyDataSetChanged();
+    protected void onPostExecute(List objects) {
+        super.onPostExecute(objects);
+        adapt = new CategoriesAdapt(context, objects);
+        gridView.setAdapter(adapt);
+        adapt.notifyDataSetChanged();
     }
+
+    private JSONObject createJson(Short gridType, Short idCategory) throws JSONException {
+        JSONObject jsonLogin = new JSONObject();
+        jsonLogin.put("gridType", gridType);
+        jsonLogin.put("idCategory", idCategory);
+        return jsonLogin;
+    }
+
+
 }
