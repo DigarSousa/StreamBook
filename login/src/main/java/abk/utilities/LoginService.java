@@ -55,7 +55,6 @@ public class LoginService extends AsyncTask<String, Void, Short> {
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            connection.setConnectTimeout(5000);
 
 
             out = new OutputStreamWriter(connection.getOutputStream());

@@ -2,7 +2,6 @@ package abk.utilities;
 
 import abk.model.Category;
 import abk.utilities.adapter.CategoriesAdapt;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.GridView;
@@ -13,6 +12,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,16 +22,18 @@ import java.util.List;
 /**
  * Created by edgar on 24/08/15.
  */
-public class GridUtil extends AsyncTask<Void, Void, List<Category>> {
+public class GridService extends AsyncTask<Void, Void, List<Category>> {
     private String url;
     private Context context;
+    private Short gridType;
     private GridView gridView;
     private CategoriesAdapt categoriesAdapt;
 
-    public GridUtil(GridView gridView, Context context, String url) {
+    public GridService(GridView gridView, Context context, String url, Short gridType) {
         this.url = url;
         this.context = context;
         this.gridView = gridView;
+        this.gridType = gridType;
     }
 
     @Override
@@ -40,15 +42,25 @@ public class GridUtil extends AsyncTask<Void, Void, List<Category>> {
 
     @Override
     protected List<Category> doInBackground(Void... voids) {
-        List<Category> categories = new ArrayList();
+        List<Category> categories = new ArrayList<Category>();
         URL toConnect;
         HttpURLConnection connection;
         InputStreamReader in;
+        OutputStreamWriter out;
         BufferedReader reader;
         try {
             toConnect = new URL(url);
             connection = (HttpURLConnection) toConnect.openConnection();
             connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+
+            out = new OutputStreamWriter(connection.getOutputStream());
+            out.write(gridType.toString());
+            out.flush();
+            out.close();
 
 
             in = new InputStreamReader(connection.getInputStream());
@@ -61,17 +73,23 @@ public class GridUtil extends AsyncTask<Void, Void, List<Category>> {
 
             line = sb.toString();
             JSONArray jsonArray = new JSONArray(line);
+            if (gridType.equals(Constants.CATEGORY)) {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject json = (JSONObject) jsonArray.get(i);
+                    Category category = new Category();
+                    category.setIdentifier(json.getLong("id"));
+                    category.setName(json.getString("name"));
+                    category.setImage(DataUtil.getBitMapByBase64(json.getString("image")));
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject json = (JSONObject) jsonArray.get(i);
-                Category category = new Category();
-                category.setIdentifier(json.getLong("id"));
-                category.setName(json.getString("name"));
-                category.setImage(DataUtil.getBitMapByBase64(json.getString("image")));
+                    categories.add(category);
+                }
+            } else {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject json = (JSONObject) jsonArray.get(i);
 
-                categories.add(category);
+
+                }
             }
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

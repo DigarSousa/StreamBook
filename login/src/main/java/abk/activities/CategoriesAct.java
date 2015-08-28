@@ -2,8 +2,7 @@ package abk.activities;
 
 import abk.model.Category;
 import abk.utilities.Constants;
-import abk.utilities.GridUtil;
-import abk.utilities.adapter.CategoriesAdapt;
+import abk.utilities.GridService;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,7 +26,7 @@ public class CategoriesAct extends Activity {
         setContentView(R.layout.categories_act);
 
         gridView = (GridView) findViewById(R.id.grdCategories);
-        new GridUtil(gridView, getApplicationContext(), Constants.URL_CATEGORY).execute();
+        new GridService(gridView, getApplicationContext(), Constants.URL_CATEGORY, Constants.CATEGORY).execute();
 
     }
 
