@@ -13,8 +13,5 @@ public class Constants {
     public static final String URL_LOGIN = SERVER + "audiobook/Login.php";
     public static final String URL_CATEGORY = SERVER + "audiobook/Grid.php";
 
-    public static final Short CATEGORY = 0;
-    public static final Short BOOK = 1;
-
 
 }

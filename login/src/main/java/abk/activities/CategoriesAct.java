@@ -1,8 +1,7 @@
 package abk.activities;
 
-import abk.model.Category;
 import abk.utilities.Constants;
-import abk.utilities.GridService;
+import abk.utilities.CateoryService;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,12 +12,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 public class CategoriesAct extends Activity {
 
     private GridView gridView;
-    private List<Category> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +22,9 @@ public class CategoriesAct extends Activity {
         setContentView(R.layout.categories_act);
 
         gridView = (GridView) findViewById(R.id.grdCategories);
-        new GridService(gridView, getApplicationContext(), Constants.URL_CATEGORY, Constants.BOOK).execute();
+        new CateoryService(gridView, getApplicationContext(), Constants.URL_CATEGORY).execute();
 
     }
-
 
     private void setListeners() {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

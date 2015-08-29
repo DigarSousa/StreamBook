@@ -5,6 +5,11 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Patterns;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+
 /**
  * Created by edgar on 28/07/15.
  */
@@ -33,5 +38,29 @@ public class DataUtil {
         byte[] decode = Base64.decode(base64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decode, 0, decode.length);
     }
+
+    /**
+     * Receive a HttpURLConnection
+     * Return a string value from the input stream...
+     *
+     * @param connection
+     * @return
+     * @throws IOException
+     */
+    public static String getInputString(HttpURLConnection connection) throws IOException {
+
+        InputStreamReader in = new InputStreamReader(connection.getInputStream());
+        BufferedReader reader = new BufferedReader(in);
+        String line;
+        StringBuilder sb = new StringBuilder();
+
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        return sb.toString();
+
+    }
+
 
 }

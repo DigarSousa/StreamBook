@@ -17,14 +17,14 @@ public class StartAct extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences prefs = getSharedPreferences(Constants.SESSION_LOGIN, 0);
+        /*SharedPreferences prefs = getSharedPreferences(Constants.SESSION_LOGIN, 0);
         if (prefs != null) {
             if (prefs.getBoolean(Constants.IS_LOGGED, false)) {
                 Intent it = new Intent(this, CategoriesAct.class);
                 startActivity(it);
                 this.finish();
             }
-        }
+        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_act);
         initFiels();
