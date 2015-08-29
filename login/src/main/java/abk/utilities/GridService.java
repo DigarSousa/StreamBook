@@ -51,6 +51,7 @@ public class GridService extends AsyncTask<Void, Void, List<Category>> {
         InputStreamReader in;
         OutputStreamWriter out;
         JSONArray jsonArray;
+
         try {
             toConnect = new URL(url);
             connection = (HttpURLConnection) toConnect.openConnection();

@@ -1,12 +1,14 @@
 package abk.model;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by edgar on 28/08/15.
  */
 public class Book {
     private Long identifier;
     private String name;
-    private String image;
+    private Bitmap image;
     private Long idCategory;
 
     public Long getIdentifier() {
@@ -25,11 +27,11 @@ public class Book {
         this.name = name;
     }
 
-    public String getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 
