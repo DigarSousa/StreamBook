@@ -80,7 +80,9 @@ public class GridService extends AsyncTask<Void, Void, List<Category>> {
                     JSONObject json = (JSONObject) jsonArray.get(i);
 
                     Book book = new Book();
-
+                    book.setName(json.getString("name"));
+                    book.setIdentifier(json.getLong("id"));
+                    book.setImage(DataUtil.getBitMapByBase64(json.getString("image")));
 
                 }
             }
