@@ -60,6 +60,7 @@ public class BookService extends AsyncTask<Void, Void, List<Book>> {
                 book.setImage(DataUtil.getBitMapByBase64(json.getString("image")));
                 book.setIdCategory(json.getLong("idCategory"));
                 book.setAuthor(json.getString("author"));
+                book.setDescription(json.getString("description"));
 
                 books.add(book);
             }
