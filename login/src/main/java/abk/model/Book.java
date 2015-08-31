@@ -10,6 +10,7 @@ public class Book {
     private String name;
     private Bitmap image;
     private Long idCategory;
+    private String author;
 
     public Long getIdentifier() {
         return identifier;
@@ -43,4 +44,11 @@ public class Book {
         this.idCategory = idCategory;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
