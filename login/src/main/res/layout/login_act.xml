@@ -84,7 +84,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:inputType="textEmailAddress"
                     android:id="@+id/txtEmail"
-                    android:textColor="#ffebe5e2"
+                    android:textColor="#a7c3c4"
                     android:textColorHint="#ffebe5e2"
                     android:textSize="18sp"
                     android:typeface="monospace"
