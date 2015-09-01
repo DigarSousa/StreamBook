@@ -12,6 +12,7 @@ public class Constants {
     public static final String URL_SIGN_UP = SERVER + "audiobook/SignUp.php";
     public static final String URL_LOGIN = SERVER + "audiobook/Login.php";
     public static final String URL_CATEGORY = SERVER + "audiobook/Category.php";
+    public static final String URL_BOOKS = SERVER + "audiobook/Book.php";
 
 
 }

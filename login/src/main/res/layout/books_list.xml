@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#11000000">
+
+    <RelativeLayout
+        android:id="@+id/bookImgArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgBook"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:background="@color/button_material_dark"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+        </ImageView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bookInfoArea"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_toRightOf="@+id/bookImgArea">
+
+        <TextView
+            android:id="@+id/txtBookName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#ff51b0a8"
+            android:textSize="25sp"
+            android:text="Testandoooooo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:id="@+id/txtBookAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textColor="#ffbcbcbc"
+            android:textSize="15sp"
+            android:text="Por Autor do Livro"
+            android:layout_below="@+id/txtBookName"
+            android:layout_alignStart="@+id/txtBookName"
+            android:layout_alignLeft="@+id/txtBookName"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/txtBookDescription"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:inputType="textMultiLine"
+            android:textColor="#ff919191"
+            android:textSize="15sp"
+            android:maxLines="3"
+            android:scrollHorizontally="true"
+            android:text="Oi meu nome é chatuba oi meu nome é chatuba oi meu nome é chatuba oi meu nome é chatuba ioioioissssssssss"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_below="@+id/txtBookAuthor"
+            android:layout_alignStart="@+id/txtBookName"
+            android:layout_alignLeft="@+id/txtBookName"
+            android:layout_marginTop="10dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

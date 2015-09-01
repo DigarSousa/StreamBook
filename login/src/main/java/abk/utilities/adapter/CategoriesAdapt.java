@@ -43,8 +43,9 @@ public class CategoriesAdapt extends BaseAdapter {
             this.gridView = inflater.inflate(R.layout.categories_grid, null);
             // set value into textview
 
+
             setLabelToCategory(position);
-            setImageToCategory();
+            setImageToCategory(position);
         } else {
             this.gridView = convertView;
         }
@@ -56,9 +57,9 @@ public class CategoriesAdapt extends BaseAdapter {
         lblCategory.setText(categories.get(position).getName());
     }
 
-    private void setImageToCategory() {
+    private void setImageToCategory(int position) {
         ImageView imgCategory = (ImageView) gridView.findViewById(R.id.imgCategory);
-        Bitmap imgCategoryNormal = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.random_objects);
+        Bitmap imgCategoryNormal = categories.get(position).getImage();
 
         final int maxSize = 250;
         int outWidth;

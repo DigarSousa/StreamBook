@@ -3,14 +3,13 @@ package abk.activities;
 import abk.utilities.Constants;
 import abk.utilities.CateoryService;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class CategoriesAct extends Activity {
 
@@ -23,14 +22,17 @@ public class CategoriesAct extends Activity {
 
         gridView = (GridView) findViewById(R.id.grdCategories);
         new CateoryService(gridView, getApplicationContext(), Constants.URL_CATEGORY).execute();
-
+        setListeners();
     }
 
     private void setListeners() {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), BookListAct.class);
+                Bundle b = new Bundle();
+                b.putInt("ctg", 0);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
     }

@@ -1,8 +1,11 @@
 package abk.utilities;
 
 import abk.model.Book;
+import abk.utilities.adapter.BookListAdpt;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.GridView;
+import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,13 +24,17 @@ import java.util.List;
 public class BookService extends AsyncTask<Void, Void, List<Book>> {
     private String url;
     private Long idCategory;
-    private GridView view;
+    private ListView view;
+    private BookListAdpt adapt;
+    private Context context;
 
-    public BookService(GridView view, String url, Long idCategory) {
+    public BookService(ListView view, Context context, String url, Long idCategory) {
         this.view = view;
         this.url = url;
+        this.context = context;
         this.idCategory = idCategory;
     }
+
 
     @Override
     protected List<Book> doInBackground(Void... voids) {
@@ -77,7 +84,9 @@ public class BookService extends AsyncTask<Void, Void, List<Book>> {
     @Override
     protected void onPostExecute(List<Book> books) {
         super.onPostExecute(books);
-        //todo: setar os livros na porra do adapt ¬¬
+        adapt = new BookListAdpt(context, books);
+        view.setAdapter(adapt);
+        adapt.notifyDataSetChanged();
     }
 
     public JSONObject createJson(Long idCategory) throws JSONException {
